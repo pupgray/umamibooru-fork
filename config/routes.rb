@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   # generates `/?page=2` instead of `/posts?page=2` on the posts#index page.
   root "posts#index"
 
+  resource :tagger
+
   namespace :admin do
     resources :users, :only => [:edit, :update]
   end
