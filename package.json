@@ -16,6 +16,7 @@
     "@fontsource/petit-formal-script": "^5.2.5",
     "@fontsource/rokkitt": "^5.2.5",
     "@fontsource/unifrakturmaguntia": "^5.2.5",
+    "@hotwired/turbo-rails": "^8.0.16",
     "@rails/ujs": "^7.1.3-4",
     "@ruffle-rs/ruffle": "^0.1.0-nightly.2024.6.7",
     "@types/babel__core": "7",

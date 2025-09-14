@@ -1,0 +1,10 @@
+.tagger__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  & > turbo-frame {
+    flex: 1 1 70vw;
+  }
+}
+

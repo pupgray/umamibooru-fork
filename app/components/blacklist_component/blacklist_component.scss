@@ -15,3 +15,9 @@
 .post-preview:not(.blacklist-initialized), .image-container:not(.blacklist-initialized) {
   visibility: hidden;
 }
+
+turbo-frame {
+  .post-preview:not(.blacklist-initialized), .image-container:not(.blacklist-initialized) {
+    visibility: initial !important;
+  }
+}

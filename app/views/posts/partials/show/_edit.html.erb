@@ -1,10 +1,12 @@
+<%# locals: (post:, for_tagger: false) %>
+
 <% unless CurrentUser.user.is_builder? %>
   <div style="margin-bottom: 1em;">
     <p>Before editing, read the <%= link_to "how to tag guide", wiki_page_path(:id => "howto:tag") %>.</p>
   </div>
 <% end %>
 
-<%= render_source_data(nil) %>
+<%= render_source_data(nil) unless for_tagger %>
 
 <%= edit_form_for(post, html: { id: "form" }) do |f| %>
   <%= f.input :q, as: :hidden, input_html: { id: nil, name: "q", value: params[:q] } %>
@@ -12,11 +14,12 @@
   <%= f.input :old_parent_id, as: :hidden, input_html: { value: post.parent_id } %>
   <%= f.input :old_source, as: :hidden, input_html: { value: post.source } %>
   <%= f.input :old_rating, as: :hidden, input_html: { value: post.rating } %>
+  <%= hidden_field_tag :for_tagger, value: 1 if for_tagger %>
 
   <%= f.input :rating, label: "Rating #{link_to_wiki help_icon, "howto:rate", classes: "inactive-link", target: "_blank"}".html_safe, wrapper_html: { class: "radio-button-group thin-x-scrollbar text-xs" }, collection: Post::RATINGS.invert.reverse_each.to_h, as: :radio_buttons, boolean_style: :inline %>
-  <%= f.input :has_embedded_notes, label: "Embed notes", as: :boolean, wrapper: "inline-toggle-switch" %>
-  <%= f.input :parent_id, label: "Parent", as: :string %>
-  <%= f.input :source %>
+  <%= f.input :has_embedded_notes, label: "Embed notes", as: :boolean, wrapper: "inline-toggle-switch" unless for_tagger %>
+  <%= f.input :parent_id, label: "Parent", as: :string unless for_tagger %>
+  <%= f.input :source unless for_tagger %>
 
   <div class="input fixed-width-container">
     <div class="flex justify-between">

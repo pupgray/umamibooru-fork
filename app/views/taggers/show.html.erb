@@ -1,1 +1,11 @@
-Helllllo
+<h2>Quick Tagger</h2>
+
+<p>This tool just selects a random post with the "tagme" tag. Help out if you have a spare moment! If you think a post is fully tagged after you've added any extra info, just remove the tagme tag.</p>
+
+<div class="tagger__container">
+  <%= turbo_frame_tag @post, src: post_url(@post) %>
+
+  <div class="upload-edit-container">
+    <%= render 'posts/partials/show/edit', post: @post, for_tagger: true %>
+  </div>
+</div>

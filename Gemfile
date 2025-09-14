@@ -69,6 +69,7 @@ gem "abbrev"
 gem "rubyzip", require: "zip"
 gem "webrick"
 gem "useragent"
+gem 'turbo-rails'
 
 group :development do
   gem 'rubocop', require: false

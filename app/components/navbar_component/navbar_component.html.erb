@@ -27,6 +27,7 @@
       <%= nav_link_to("Pools", main_app.gallery_pools_path) %>
       <%= nav_link_to("Wiki", main_app.wiki_page_path("help:home")) %>
       <%= nav_link_to("Forum", main_app.forum_topics_path, class: ("forum-updated font-italic" if current_user.has_forum_been_updated?)) if Danbooru.config.forum_enabled?.to_s.truthy? %>
+      <%= nav_link_to("Quick Tagger", main_app.tagger_path) %>
 
       <% if current_user.is_moderator? %>
         <% if ModerationReport.pending.count > 0 %>
