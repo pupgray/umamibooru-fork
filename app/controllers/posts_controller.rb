@@ -64,7 +64,7 @@ class PostsController < ApplicationController
     @show_votes = (params[:show_votes].presence || cookies[:post_preview_show_votes].presence || "false").truthy?
     @preview_size = params[:size].presence || cookies[:post_preview_size].presence || PostGalleryComponent::DEFAULT_SIZE
     respond_with_post_after_update(@post) unless params[:for_tagger]
-    redirect_to tagger_path if params[:for_tagger]
+    redirect_to tagger_path(not_post_id: @post.id) if params[:for_tagger]
   end
 
   def create
