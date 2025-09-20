@@ -1,9 +1,23 @@
 <h2>Quick Tagger</h2>
 
-<p>This tool just selects a random post with the "tagme" tag. Help out if you have a spare moment! If you think a post is fully tagged after you've added any extra info, just remove the tagme tag.</p>
+<p>This tool just selects a random post with the "tagme" tag. Help out if you have a spare moment! If you think a post
+  is fully tagged after you've added any extra info, just remove the tagme tag.</p>
 
 <div class="tagger__container">
-  <%= turbo_frame_tag @post, src: post_url(@post) %>
+  <%= tag.section class: ["image-container", "note-container", ("danbirthday" if is_danbirthday?(@post))], **image_container_data_attributes(@post, CurrentUser.user) do -%>
+    <% if @post.is_flash? -%>
+      <div class="ruffle-container" data-swf="<%= @post.tagged_file_url %>"></div>
+    <% elsif @post.is_video? -%>
+      <%= tag.video(id: "image", class: "fit-width", width: @post.image_width, height: @post.image_height, autoplay: true, loop: true, controls: "controls", src: @post.tagged_file_url) %>
+    <% elsif @post.is_ugoira? -%>
+      <%= render UgoiraComponent.new(@post.media_asset, default_quality: (params.fetch(:size, CurrentUser.user.default_image_size) == "original" ? "original" : "sample"), html: { id: "image" }) %>
+    <% elsif @post.is_image? -%>
+      <picture>
+        <%= tag.source media: "(max-width: 660px)", srcset: @post.tagged_large_file_url %>
+        <%= tag.img width: @post.image_width_for(CurrentUser.user), height: @post.image_height_for(CurrentUser.user), id: "image", class: "fit-width", alt: @post.presenter.humanized_essential_tag_string, src: @post.file_url_for(CurrentUser.user) %>
+      </picture>
+    <% end %>
+  <% end %>
 
   <div class="upload-edit-container">
     <%= render 'posts/partials/show/edit', post: @post, for_tagger: true %>

@@ -269,28 +269,26 @@
     </div>
   <% end %>
 
-  <%= turbo_frame_tag @post do %>
-    <%= tag.section class: ["image-container", "note-container", ("danbirthday" if is_danbirthday?(@post))], **image_container_data_attributes(@post, CurrentUser.user) do -%>
-      <% if @post.banblocked? -%>
-        <p>This page has been removed because of a takedown request or rule violation.</p>
-      <% elsif @post.levelblocked? -%>
-        <p><%= link_to "You need a gold account to see this image", new_user_upgrade_path %>.</p>
-      <% elsif @post.safeblocked? -%>
-        <p>This image is unavailable on <%= Danbooru.config.app_name %>. Go
-          to <%= link_to "Danbooru", "https://danbooru.donmai.us" %> or disable safe mode to view
-          (<%= link_to_wiki "learn more", "help:safe_mode" %>).</p>
-      <% elsif @post.is_flash? -%>
-        <div class="ruffle-container" data-swf="<%= @post.tagged_file_url %>"></div>
-      <% elsif @post.is_video? -%>
-        <%= tag.video(id: "image", class: "fit-width", width: @post.image_width, height: @post.image_height, autoplay: true, loop: true, controls: "controls", src: @post.tagged_file_url) %>
-      <% elsif @post.is_ugoira? -%>
-        <%= render UgoiraComponent.new(@post.media_asset, default_quality: (params.fetch(:size, CurrentUser.user.default_image_size) == "original" ? "original" : "sample"), html: { id: "image" }) %>
-      <% elsif @post.is_image? -%>
-        <picture>
-          <%= tag.source media: "(max-width: 660px)", srcset: @post.tagged_large_file_url %>
-          <%= tag.img width: @post.image_width_for(CurrentUser.user), height: @post.image_height_for(CurrentUser.user), id: "image", class: "fit-width", alt: @post.presenter.humanized_essential_tag_string, src: @post.file_url_for(CurrentUser.user) %>
-        </picture>
-      <% end %>
+  <%= tag.section class: ["image-container", "note-container", ("danbirthday" if is_danbirthday?(@post))], **image_container_data_attributes(@post, CurrentUser.user) do -%>
+    <% if @post.banblocked? -%>
+      <p>This page has been removed because of a takedown request or rule violation.</p>
+    <% elsif @post.levelblocked? -%>
+      <p><%= link_to "You need a gold account to see this image", new_user_upgrade_path %>.</p>
+    <% elsif @post.safeblocked? -%>
+      <p>This image is unavailable on <%= Danbooru.config.app_name %>. Go
+        to <%= link_to "Danbooru", "https://danbooru.donmai.us" %> or disable safe mode to view
+        (<%= link_to_wiki "learn more", "help:safe_mode" %>).</p>
+    <% elsif @post.is_flash? -%>
+      <div class="ruffle-container" data-swf="<%= @post.tagged_file_url %>"></div>
+    <% elsif @post.is_video? -%>
+      <%= tag.video(id: "image", class: "fit-width", width: @post.image_width, height: @post.image_height, autoplay: true, loop: true, controls: "controls", src: @post.tagged_file_url) %>
+    <% elsif @post.is_ugoira? -%>
+      <%= render UgoiraComponent.new(@post.media_asset, default_quality: (params.fetch(:size, CurrentUser.user.default_image_size) == "original" ? "original" : "sample"), html: { id: "image" }) %>
+    <% elsif @post.is_image? -%>
+      <picture>
+        <%= tag.source media: "(max-width: 660px)", srcset: @post.tagged_large_file_url %>
+        <%= tag.img width: @post.image_width_for(CurrentUser.user), height: @post.image_height_for(CurrentUser.user), id: "image", class: "fit-width", alt: @post.presenter.humanized_essential_tag_string, src: @post.file_url_for(CurrentUser.user) %>
+      </picture>
     <% end %>
 
     <div id="note-preview"></div>

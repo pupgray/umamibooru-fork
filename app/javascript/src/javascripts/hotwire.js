@@ -1,1 +1,2 @@
-import '@hotwired/turbo-rails'
+// import '@hotwired/turbo-rails'
+// Available to be brought back later, but be careful about the jquery that loads only on page load...
