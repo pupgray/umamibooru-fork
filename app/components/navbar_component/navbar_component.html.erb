@@ -40,6 +40,15 @@
       <% end %>
 
       <%= nav_link_to("More »", main_app.site_map_path) %>
+
+
+      <% unless CurrentUser.user.is_anonymous? %>
+        <div id="right-nav">
+          <%= form_for CurrentUser.user do |f| %>
+            <%= f.select :mascot, helpers.all_mascots, { include_blank: false }, onchange: "this.form.requestSubmit()" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <% if content_for?(:secondary_links) %>

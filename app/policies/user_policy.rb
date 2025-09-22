@@ -41,6 +41,10 @@ class UserPolicy < ApplicationPolicy
     !user.is_anonymous?
   end
 
+  def change_mascot?
+    !user.is_anonymous?
+  end
+
   def can_see_last_logged_in_at?
     user.is_moderator?
   end
@@ -78,7 +82,7 @@ class UserPolicy < ApplicationPolicy
       show_deleted_posts show_deleted_children
       disable_categorized_saved_searches disable_tagged_filenames
       disable_mobile_gestures enable_safe_mode
-      enable_desktop_mode disable_post_tooltips
+      enable_desktop_mode disable_post_tooltips mascot
     ].compact
   end
 

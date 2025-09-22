@@ -175,3 +175,32 @@ ul.list-inline {
 .desktop-only {
   @media (width <= 660px) { display: none !important; }
 }
+
+header#top {
+  background-image: var(--slopscot);
+  background-size: contain;
+  margin-top: 0;
+  padding-top: 10px;
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-color: #25262b;
+}
+
+#main-menu {
+  margin-top: 0.5rem;
+  backdrop-filter: blur(3px);
+  background-color: rgba(78, 79, 96, 0.47) !important;
+  box-shadow: 0 0 5px rgba(29, 31, 34, 0.72);
+  display: flex;
+
+  #right-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+#subnav-menu {
+  backdrop-filter: blur(5px);
+  background-color: #3f405878 !important;
+}

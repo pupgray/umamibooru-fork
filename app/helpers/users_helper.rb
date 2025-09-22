@@ -23,4 +23,18 @@ module UsersHelper
   def email_verification_url(user)
     verify_user_email_url(user, email_verification_key: user.email_address&.verification_key)
   end
+
+  def all_mascots_urls
+    Rails.cache.fetch('mascots-or-should-i-say-slopscots/v1', expires_in: 5.minutes) { Dir[Rails.root.join('public/headers/**/*.jpg')] }
+  end
+
+  def all_mascots
+    all_mascots_urls
+      .chunk { it.match(/headers\/(.+)\/.*jpg/)[1] }
+      .map do |character|
+      name = character[0]
+      contents = character[1].map { [it.gsub(/^\/.*#{Regexp.quote(name)}\//, '').gsub('.jpg', '').titleize, it.gsub(Rails.root.join('public/').to_s, '')] }
+      [name.titleize, contents]
+    end
+  end
 end

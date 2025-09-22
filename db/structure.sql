@@ -2270,7 +2270,8 @@ CREATE TABLE public.users (
     upload_points integer NOT NULL,
     is_deleted boolean DEFAULT false NOT NULL,
     totp_secret character varying,
-    backup_codes integer[]
+    backup_codes integer[],
+    mascot character varying DEFAULT 'headers/judy/bukakke.jpg'::character varying NOT NULL
 );
 
 
@@ -3342,7 +3343,6 @@ ALTER TABLE ONLY public.ip_bans
 
 ALTER TABLE ONLY public.ip_geolocations
     ADD CONSTRAINT ip_geolocations_pkey PRIMARY KEY (id);
-
 
 
 --
@@ -7113,6 +7113,7 @@ ALTER TABLE ONLY public.user_upgrades
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250922030805'),
 ('20250720155738'),
 ('20250718142035'),
 ('20250716202530'),

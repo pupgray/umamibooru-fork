@@ -330,6 +330,7 @@ module ApplicationHelper
       lang: "en",
       class: "c-#{controller_param} a-#{action_param} flex flex-col",
       spellcheck: "false",
+      style: current_user && !(current_user.is_anonymous?) ? "--slopscot: url(/#{current_user.mascot})" : "--slopscot: url(/headers/judy/bukakke.jpg)",
       data: {
         controller: controller_param,
         action: action_param,

@@ -279,7 +279,6 @@ Rails.application.routes.draw do
     resources :api_keys, only: [:new, :create, :edit, :update, :index, :destroy]
     resources :uploads, only: [:index]
     resources :user_events, only: [:index], path: "events"
-
     get :change_name, on: :member, to: "user_name_change_requests#new"
     get :custom_style, on: :collection
     get :deactivate, on: :member     # /users/:id/deactivate
