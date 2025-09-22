@@ -25,7 +25,7 @@ module UsersHelper
   end
 
   def all_mascots_urls
-    Rails.cache.fetch('mascots-or-should-i-say-slopscots/v1', expires_in: 5.minutes) { Dir[Rails.root.join('public/headers/**/*.jpg')] }
+    Rails.cache.fetch('mascots-or-should-i-say-slopscots/v1', expires_in: 10.seconds) { Dir[Rails.root.join('public/headers/**/*.jpg')] }
   end
 
   def all_mascots
