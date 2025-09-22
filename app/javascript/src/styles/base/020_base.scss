@@ -187,13 +187,14 @@ header#top {
 }
 
 #main-menu {
-  margin-top: 0.5rem;
+  margin-top: 25px;
   backdrop-filter: blur(3px);
   background-color: rgba(78, 79, 96, 0.47) !important;
   box-shadow: 0 0 5px rgba(29, 31, 34, 0.72);
   display: flex;
 
   #right-nav {
+    opacity: 0.4;
     flex: 1;
     display: flex;
     flex-direction: row-reverse;

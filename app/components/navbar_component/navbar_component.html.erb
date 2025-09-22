@@ -41,7 +41,6 @@
 
       <%= nav_link_to("More »", main_app.site_map_path) %>
 
-
       <% unless CurrentUser.user.is_anonymous? %>
         <div id="right-nav">
           <%= form_for CurrentUser.user do |f| %>
